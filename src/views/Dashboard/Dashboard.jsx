@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from "react";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
@@ -7,14 +8,15 @@ import ChartistGraph from "react-chartist";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
-import Store from "@material-ui/icons/Store";
+import DoneOutline from "@material-ui/icons/DoneOutline";
+import Gavel from "@material-ui/icons/Build";
 import Warning from "@material-ui/icons/Warning";
 import DateRange from "@material-ui/icons/DateRange";
 import LocalOffer from "@material-ui/icons/LocalOffer";
 import Update from "@material-ui/icons/Update";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import AccessTime from "@material-ui/icons/AccessTime";
-import Accessibility from "@material-ui/icons/Accessibility";
+import Info from "@material-ui/icons/Info";
 import BugReport from "@material-ui/icons/BugReport";
 import Code from "@material-ui/icons/Code";
 import Cloud from "@material-ui/icons/Cloud";
@@ -30,7 +32,7 @@ import CardHeader from "components/Card/CardHeader.jsx";
 import CardIcon from "components/Card/CardIcon.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
-
+import Fire from "components/Database/Firebase.js"
 import { bugs, website, server } from "variables/general.jsx";
 
 import {
@@ -52,8 +54,14 @@ class Dashboard extends React.Component {
   handleChangeIndex = index => {
     this.setState({ value: index });
   };
+  componentDidMount(){
+    
+  }
   render() {
     const { classes } = this.props;
+    let data = Fire.shared.collection
+    // window.alert("uros")
+    window.alert(JSON.stringify(data))
     return (
       <div>
         <GridContainer>
@@ -80,14 +88,14 @@ class Dashboard extends React.Component {
               </CardFooter>
             </Card> */}
           {/* </GridItem> */}
-          <GridItem xs={12} sm={6} md={3}>
+          <GridItem xs={12} sm={6} md={4}>
             <Card>
               <CardHeader color="success" stats icon>
                 <CardIcon color="success">
-                  <Store />
+                  <DoneOutline />
                 </CardIcon>
-                <p className={classes.cardCategory}>Revenue</p>
-                <h3 className={classes.cardTitle}>$34,245</h3>
+                <p className={classes.cardCategory}>Popravlejno</p>
+                <h3 className={classes.cardTitle}>34,245</h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
@@ -97,13 +105,13 @@ class Dashboard extends React.Component {
               </CardFooter>
             </Card>
           </GridItem>
-          <GridItem xs={12} sm={6} md={3}>
+          <GridItem xs={12} sm={6} md={4}>
             <Card>
               <CardHeader color="danger" stats icon>
                 <CardIcon color="danger">
-                  <Icon>info_outline</Icon>
+                  <Gavel/>
                 </CardIcon>
-                <p className={classes.cardCategory}>Fixed Issues</p>
+                <p className={classes.cardCategory}>Za popravku</p>
                 <h3 className={classes.cardTitle}>75</h3>
               </CardHeader>
               <CardFooter stats>
@@ -114,14 +122,14 @@ class Dashboard extends React.Component {
               </CardFooter>
             </Card>
           </GridItem>
-          <GridItem xs={12} sm={6} md={3}>
+          <GridItem xs={12} sm={6} md={4}>
             <Card>
               <CardHeader color="info" stats icon>
                 <CardIcon color="info">
-                  <Accessibility />
+                  <Info />
                 </CardIcon>
-                <p className={classes.cardCategory}>Followers</p>
-                <h3 className={classes.cardTitle}>+245</h3>
+                <p className={classes.cardCategory}>Ukupno</p>
+                <h3 className={classes.cardTitle}>245</h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
@@ -133,7 +141,33 @@ class Dashboard extends React.Component {
           </GridItem>
         </GridContainer>
         <GridContainer>
+        <Card chart>
           <GridItem xs={12} sm={12} md={12}>
+              <CardHeader color="warning">
+                <ChartistGraph
+                  className="ct-chart"
+                  data={emailsSubscriptionChart.data}
+                  type="Bar"
+                  options={emailsSubscriptionChart.options}
+                  responsiveOptions={emailsSubscriptionChart.responsiveOptions}
+                  listener={emailsSubscriptionChart.animation}
+                />
+              </CardHeader>
+              <CardBody>
+                <h4 className={classes.cardTitle}>Broj prijava po mesecima</h4>
+                <p className={classes.cardCategory}>Lorem ipsum</p>
+              </CardBody>
+              <CardFooter chart>
+                <div className={classes.stats}>
+                  <AccessTime /> campaign sent 2 days ago
+                </div>
+              </CardFooter>
+          </GridItem>
+            </Card>
+          </GridContainer>
+
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={6}>
             <Card chart>
               <CardHeader color="success">
                 <ChartistGraph
@@ -159,11 +193,8 @@ class Dashboard extends React.Component {
                 </div>
               </CardFooter>
             </Card>
-          </GridItem>
-          </GridContainer>
-
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={6}>
+          </GridItem>    
+          <GridItem xs={12} sm={12} md={6}>            
             <Card chart>
               <CardHeader color="warning">
                 <ChartistGraph

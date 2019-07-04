@@ -21,6 +21,7 @@ const dailySalesChart = {
     series: [[12, 17, 7, 17, 23, 18, 38]]
   },
   options: {
+    seriesBarDistance: 10,
     lineSmooth: Chartist.Interpolation.cardinal({
       tension: 0
     }),
